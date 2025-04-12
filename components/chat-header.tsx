@@ -55,12 +55,7 @@ export function ChatHeader({
         </div>
 
         <div className="flex items-center space-x-3">
-          <Button variant="ghost" size="icon" className="magnetic-button relative text-gray-300 hover:text-white">
-            <Bell className="h-5 w-5" />
-            <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#00E676] text-[10px] text-white">
-              3
-            </span>
-          </Button>
+
 
           <Button variant="ghost" size="icon" className="magnetic-button text-gray-300 hover:text-white">
             <HelpCircle className="h-5 w-5" />
