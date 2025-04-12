@@ -1,0 +1,371 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    --crypto-green: 142 100% 45%;
+  }
+
+  .dark {
+    --background: 222.2 18% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 18% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 18% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 221.2 83.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    --crypto-green: 142 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Glass morphism effects */
+.glass-morphism {
+  @apply bg-opacity-20 backdrop-blur-lg backdrop-filter;
+  background-color: rgba(18, 24, 38, 0.7);
+  border: 1px solid rgba(45, 91, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+  @apply glass-morphism rounded-xl;
+}
+
+.glass-card-hover {
+  @apply glass-morphism rounded-xl transition-all duration-300;
+}
+
+.glass-card-hover:hover {
+  border: 1px solid rgba(45, 91, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(45, 91, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Typing animation */
+.typing-animation::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Message animations */
+.message-appear {
+  animation: messageAppear 0.3s ease-out forwards;
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button animations */
+.magnetic-button {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.magnetic-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(45, 91, 255, 0.2);
+}
+
+.magnetic-button:active {
+  transform: translateY(0);
+}
+
+.magnetic-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.magnetic-button:hover::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+/* Floating animation for 3D elements */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Glow effects */
+.glow {
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.5), 0 0 20px rgba(0, 230, 118, 0.3), 0 0 30px rgba(0, 230, 118, 0.1);
+}
+
+.glow-blue {
+  box-shadow: 0 0 10px rgba(45, 91, 255, 0.5), 0 0 20px rgba(45, 91, 255, 0.3), 0 0 30px rgba(45, 91, 255, 0.1);
+}
+
+/* Particle effects */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(45, 91, 255, 0.5);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+/* Hexagon background pattern */
+.hex-pattern {
+  background-color: rgba(18, 24, 38, 0.8);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 17.32v34.64L30 60 0 51.96V17.32L30 0zm0 5.39L6.16 17.32v25.36L30 54.61l23.84-11.93V17.32L30 5.39z' fill='%232d5bff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(18, 24, 38, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(45, 91, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(45, 91, 255, 0.5);
+}
+
+/* Crypto price tag */
+.crypto-price-tag {
+  background: linear-gradient(135deg, rgba(45, 91, 255, 0.2), rgba(0, 230, 118, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.crypto-price-tag:hover {
+  background: linear-gradient(135deg, rgba(45, 91, 255, 0.3), rgba(0, 230, 118, 0.3));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.crypto-price-tag.up {
+  border-left: 3px solid rgba(0, 230, 118, 0.8);
+}
+
+.crypto-price-tag.down {
+  border-left: 3px solid rgba(255, 59, 48, 0.8);
+}
+
+/* Markdown content styling */
+.markdown-content h1 {
+  @apply text-2xl font-bold mt-4 mb-2 text-white;
+}
+
+.markdown-content h2 {
+  @apply text-xl font-bold mt-3 mb-2 text-white;
+}
+
+.markdown-content h3 {
+  @apply text-lg font-bold mt-2 mb-1 text-white;
+}
+
+.markdown-content p {
+  @apply my-2;
+}
+
+.markdown-content ul {
+  @apply list-disc pl-5 my-2;
+}
+
+.markdown-content ol {
+  @apply list-decimal pl-5 my-2;
+}
+
+.markdown-content li {
+  @apply my-1;
+}
+
+.markdown-content table {
+  @apply w-full border-collapse my-3;
+}
+
+.markdown-content th {
+  @apply bg-gray-800 border border-gray-700 px-3 py-2 text-left;
+}
+
+.markdown-content td {
+  @apply border border-gray-700 px-3 py-2;
+}
+
+.markdown-content code {
+  @apply bg-gray-800 px-1 py-0.5 rounded text-sm;
+}
+
+.markdown-content pre {
+  @apply bg-gray-800 p-3 rounded-md overflow-x-auto my-3;
+}
+
+/* Crypto theme colors */
+.crypto-blue {
+  color: #2d5bff;
+}
+
+.crypto-green {
+  color: #00e676;
+}
+
+.bg-crypto-blue {
+  background-color: #2d5bff;
+}
+
+.bg-crypto-green {
+  background-color: #00e676;
+}
+
+.border-crypto-blue {
+  border-color: #2d5bff;
+}
+
+.border-crypto-green {
+  border-color: #00e676;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, #2d5bff, #00e676);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(45, 91, 255, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(45, 91, 255, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(45, 91, 255, 0);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Shimmer effect for loading states */
+.shimmer {
+  background: linear-gradient(90deg, rgba(45, 91, 255, 0.1), rgba(45, 91, 255, 0.2), rgba(45, 91, 255, 0.1));
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
