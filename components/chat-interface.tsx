@@ -223,7 +223,6 @@ export function ChatInterface() {
           />
 
           <div className="ml-2">
-            <ThemeToggle />
           </div>
         </div>
 
