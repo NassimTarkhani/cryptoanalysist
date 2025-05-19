@@ -68,7 +68,7 @@ export function ChatHeader({
                   <AvatarImage src="/placeholder.svg?height=32&width=32" />
                   <AvatarFallback className="bg-[#2D5BFF]">U</AvatarFallback>
                 </Avatar>
-                <span className="text-sm">User Profile</span>
+                <span className="text-sm"></span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="glass-morphism border-[#2D5BFF]">

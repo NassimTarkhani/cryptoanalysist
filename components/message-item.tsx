@@ -117,11 +117,7 @@ export function MessageItem({ message, isTyping = false }: MessageItemProps) {
       )}
 
       <div
-        className={`relative max-w-[85%] rounded-xl p-4 ${
-          message.role === "user"
-            ? "bg-gradient-to-r from-[#2D5BFF] to-[#2D5BFF]/80 text-white"
-            : "glass-morphism border-[#2D5BFF]/30 text-gray-100"
-        }`}
+        className={`relative max-w-[85%] rounded-xl p-4 ${message.role === "user" ? "bg-gradient-to-r from-[#2D5BFF] to-[#2D5BFF]/80 text-white" : "glass-morphism border-[#2D5BFF]/30 text-gray-100"}`}
       >
         {message.role === "assistant" && (
           <div className="markdown-content">
@@ -159,9 +155,7 @@ export function MessageItem({ message, isTyping = false }: MessageItemProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className={`h-6 w-6 rounded-full bg-[#121826] p-1 hover:text-white border border-[#2D5BFF]/30 ${
-                    feedback === "up" ? "text-[#00E676]" : "text-gray-300"
-                  }`}
+                  className={`h-6 w-6 rounded-full bg-[#121826] p-1 hover:text-white border border-[#2D5BFF]/30 ${feedback === "up" ? "text-[#00E676]" : "text-gray-300"}`}
                   onClick={() => handleFeedback("up")}
                 >
                   <ThumbsUp className="h-4 w-4" />
@@ -169,9 +163,7 @@ export function MessageItem({ message, isTyping = false }: MessageItemProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className={`h-6 w-6 rounded-full bg-[#121826] p-1 hover:text-white border border-[#2D5BFF]/30 ${
-                    feedback === "down" ? "text-red-400" : "text-gray-300"
-                  }`}
+                  className={`h-6 w-6 rounded-full bg-[#121826] p-1 hover:text-white border border-[#2D5BFF]/30 ${feedback === "down" ? "text-red-400" : "text-gray-300"}`}
                   onClick={() => handleFeedback("down")}
                 >
                   <ThumbsDown className="h-4 w-4" />

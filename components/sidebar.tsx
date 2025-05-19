@@ -87,12 +87,12 @@ export function Sidebar({
   }
 
   return (
-    <div className={`h-[calc(100vh-2rem)] transition-all duration-300 ${collapsed ? "w-16" : "w-72"}`}>
+    <div className={`h-[calc(100vh-2rem)] transition-all duration-300 fixed sm:static z-50 sm:z-0 bg-gray-800/80 backdrop-blur-sm ${collapsed ? "w-0 sm:w-16 translate-x-[-100%] sm:translate-x-0" : "w-11/12 sm:w-64 lg:w-72 max-w-[90vw] sm:max-w-none translate-x-0"}`}>
       <div className="glass-card h-full flex flex-col">
         {/* Sidebar Header */}
-        <div className="p-4 flex items-center justify-between border-b border-[#2D5BFF]/20">
+        <div className="p-3 sm:p-4 flex items-center justify-between border-b border-[#2D5BFF]/20">
           {!collapsed && (
-            <div className="flex items-center">
+            <div className="hidden sm:flex items-center">
               <Avatar className="h-8 w-8 mr-2">
                 <AvatarImage src="/placeholder.svg?height=32&width=32" />
                 <AvatarFallback className="bg-[#2D5BFF]">U</AvatarFallback>
@@ -106,43 +106,44 @@ export function Sidebar({
           <Button
             variant="ghost"
             size="icon"
-            className="ml-auto h-8 w-8 rounded-full"
+            className="ml-auto h-10 w-10 sm:h-8 sm:w-8 rounded-full"
             onClick={() => setCollapsed(!collapsed)}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
           </Button>
         </div>
 
         {/* Search and New Chat */}
-        <div className="p-3">
+        <div className="p-2 sm:p-3">
           {!collapsed ? (
-            <div className="space-y-2">
+            <div className="space-y-3 sm:space-y-2">
               <div className="relative">
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
                 <Input
-                  placeholder="Search conversations..."
-                  className="pl-8 bg-transparent border-[#2D5BFF]/30 focus:border-[#00E676]"
+                  placeholder="Search..."
+                  className="pl-8 bg-transparent border-[#2D5BFF]/30 focus:border-[#00E676] text-sm sm:text-base"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
               <Button
-                className="w-full bg-gradient-to-r from-[#2D5BFF] to-[#00E676] hover:opacity-90"
+                className="w-full bg-gradient-to-r from-[#2D5BFF] to-[#00E676] hover:opacity-90 text-sm sm:text-base"
                 onClick={handleNewConversation}
               >
                 <PlusCircle className="mr-2 h-4 w-4" />
-                New Conversation
+                New Chat
               </Button>
             </div>
           ) : (
-            <div className="flex flex-col items-center space-y-2">
+            <div className="flex flex-col items-center space-y-3 sm:space-y-2">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-10 w-10 rounded-full hover:bg-[#2D5BFF]/20"
+                      className="h-12 w-12 sm:h-10 sm:w-10 rounded-full hover:bg-[#2D5BFF]/20"
                       onClick={() => setCollapsed(false)}
                     >
                       <Search className="h-5 w-5" />
@@ -153,14 +154,13 @@ export function Sidebar({
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-10 w-10 rounded-full hover:bg-[#2D5BFF]/20"
+                      className="h-12 w-12 sm:h-10 sm:w-10 rounded-full hover:bg-[#2D5BFF]/20"
                       onClick={handleNewConversation}
                     >
                       <PlusCircle className="h-5 w-5" />
@@ -176,19 +176,19 @@ export function Sidebar({
         </div>
 
         {/* Conversation List */}
-        <ScrollArea className="flex-1 px-3">
+        <ScrollArea className="flex-1 px-2 sm:px-3 max-h-screen">
           {!collapsed ? (
-            <div className="space-y-1 py-2">
+            <div className="space-y-2 sm:space-y-1 py-2">
               {filteredConversations.length > 0 ? (
                 filteredConversations.map((conversation) => (
                   <div
                     key={conversation.id}
-                    className={`group flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-[#2D5BFF]/20 cursor-pointer ${currentConversationId === conversation.id ? "bg-[#2D5BFF]/20 border-l-2 border-[#00E676]" : ""}`}
+                    className={`group flex items-center justify-between rounded-lg p-3 sm:p-2 transition-colors hover:bg-[#2D5BFF]/20 cursor-pointer ${currentConversationId === conversation.id ? "bg-[#2D5BFF]/20 border-l-2 border-[#00E676]" : ""}`}
                     onClick={() => setCurrentConversation(conversation.id)}
                   >
                     <div className="flex items-center">
                       <MessageSquare className="mr-2 h-4 w-4 text-gray-400" />
-                      <div className="max-w-[140px]">
+                      <div className="max-w-full sm:max-w-[140px]">
                         <p className="truncate text-sm font-medium">{conversation.title}</p>
                         <p className="truncate text-xs text-gray-400">
                           {new Date(conversation.updatedAt).toLocaleDateString()}
@@ -196,13 +196,13 @@ export function Sidebar({
                       </div>
                     </div>
                     <div className="flex opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button variant="ghost" size="icon" className="h-6 w-6 rounded-full">
+                      <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-6 sm:w-6 rounded-full">
                         <Star className="h-3 w-3" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-6 w-6 rounded-full"
+                        className="h-8 w-8 sm:h-6 sm:w-6 rounded-full"
                         onClick={() => handleDeleteConversation(conversation.id)}
                       >
                         <Trash2 className="h-3 w-3" />
@@ -215,7 +215,7 @@ export function Sidebar({
               )}
             </div>
           ) : (
-            <div className="flex flex-col items-center space-y-2 py-2">
+            <div className="flex flex-col items-center space-y-3 sm:space-y-2 py-2">
               {filteredConversations.slice(0, 5).map((conversation) => (
                 <TooltipProvider key={conversation.id}>
                   <Tooltip>
@@ -223,7 +223,7 @@ export function Sidebar({
                       <Button
                         variant="ghost"
                         size="icon"
-                        className={`h-10 w-10 rounded-full ${currentConversationId === conversation.id ? "bg-[#2D5BFF]/20 border-l-2 border-[#00E676]" : ""}`}
+                        className={`h-12 w-12 sm:h-10 sm:w-10 rounded-full ${currentConversationId === conversation.id ? "bg-[#2D5BFF]/20 border-l-2 border-[#00E676]" : ""}`}
                         onClick={() => setCurrentConversation(conversation.id)}
                       >
                         <MessageSquare className="h-5 w-5" />
@@ -240,28 +240,28 @@ export function Sidebar({
         </ScrollArea>
 
         {/* Footer */}
-        <div className="p-3 border-t border-[#2D5BFF]/20">
+        <div className="p-2 sm:p-3 border-t border-[#2D5BFF]/20">
           {!collapsed ? (
             <div className="flex items-center justify-between">
-              <Button variant="ghost" size="sm" className="text-xs">
+              <Button variant="ghost" size="sm" className="text-sm sm:text-xs">
                 <Settings className="mr-1 h-3 w-3" />
                 Settings
               </Button>
-              <Button variant="ghost" size="sm" className="text-xs">
+              <Button variant="ghost" size="sm" className="text-sm sm:text-xs">
                 <HelpCircle className="mr-1 h-3 w-3" />
                 Help
               </Button>
-              <Button variant="ghost" size="sm" className="text-xs text-red-400">
+              <Button variant="ghost" size="sm" className="text-sm sm:text-xs text-red-400">
                 <LogOut className="mr-1 h-3 w-3" />
                 Logout
               </Button>
             </div>
           ) : (
-            <div className="flex flex-col items-center space-y-2">
+            <div className="flex flex-col items-center space-y-3 sm:space-y-2">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
+                    <Button variant="ghost" size="icon" className="h-10 w-10 sm:h-8 sm:w-8 rounded-full">
                       <Settings className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
@@ -270,11 +270,10 @@ export function Sidebar({
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
+                    <Button variant="ghost" size="icon" className="h-10 w-10 sm:h-8 sm:w-8 rounded-full">
                       <LogOut className="h-4 w-4 text-red-400" />
                     </Button>
                   </TooltipTrigger>
